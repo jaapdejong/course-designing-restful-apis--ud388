@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# get my foursquare id & secret
+. ../../../../foursquare-ud338
+# allow any api version
+VERSION=$(date +"%Y%m%d")
+
+get() {
+	WHAT=$1
+	LOCATION=$2
+	LL=$3
+	
+	echo "::::::::"
+	echo "search $WHAT in $LOCATION"
+	echo "::::::::"
+	curl -s -X GET "https://api.foursquare.com/v2/venues/search?ll=${LL}&query=${WHAT}&radius=1000&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&v=${VERSION}&m=foursquare" | json_pp
+	echo
+}
+
+get "Pizza"  "Mountain View, California" "37.392971,-122.076044"
+get "Sushi"  "Miami, Florida"            "25.773822,-80.237947"
+get "Donuts" "Washington, DC"            "38.897478,-77.000147"
+get "Salad"  "New York, New York"        "40.768349,-73.96575"
+
