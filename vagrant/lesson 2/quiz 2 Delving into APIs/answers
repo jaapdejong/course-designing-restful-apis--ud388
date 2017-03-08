@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for LOC in "Tokio,Japan" "Jakarta,Indonesia" "Maputo,Mozambique" "Geneva,Switzerland" "Los+Angelos+California,USA" ; do
+	echo "$LOC: "
+	curl -s -X GET "https://maps.googleapis.com/maps/api/geocode/json?address=$LOC" | awk '/"location"/,/}/'
+	echo
+done
+
